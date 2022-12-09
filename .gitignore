@@ -1,0 +1,13 @@
+
+/*.cs
+/*.config
+/*.aspx
+/*.aspx.cs
+/*.ascx.designer.cs
+/.vs
+/*.asax
+/*.Master
+/.ico
+!/README.md
+!/WebForm1.aspx
+!/WebForm1.aspx.cs
