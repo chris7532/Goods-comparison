@@ -5,9 +5,10 @@
 /*.aspx.cs
 /*.ascx.designer.cs
 /.vs
-/*.asax
-/*.Master
-/.ico
+/Global.asax
+/Site.Master
+/Site.Mobile.Master
+/favicon.ico
 !/README.md
 !/WebForm1.aspx
 !/WebForm1.aspx.cs
