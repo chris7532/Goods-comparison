@@ -4,6 +4,7 @@
 /*.aspx
 /*.aspx.cs
 /*.ascx.designer.cs
+/*.ascx
 /.vs
 /Global.asax
 /Site.Master
