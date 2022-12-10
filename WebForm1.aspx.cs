@@ -41,7 +41,7 @@ namespace project
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            Label4.Text = "";           
+            Label1.Text = "";           
             // if (!IsPostBack)
                 Check_db();
                  
@@ -370,7 +370,7 @@ namespace project
                         dt_User = GetList(mPath + mFileName);
                         GridView2.DataSource = dt_User;
                         GridView2.DataBind();
-                        this.GridView2.Style.Add("display", "none");
+                        //this.GridView2.Style.Add("display", "none");
                         if (dt_User == null)
                         {
                             MessageBox.Show("獲取Excel內容失敗！");
@@ -528,8 +528,7 @@ namespace project
         protected DataTable Query_Same()
         {
 
-            string strSql = @"select a.* from  dbo.工作表1 a 
-                              inner join dbo.工作表2 b on";
+            string strSql = @"select a.* from  dbo.工作表1 a inner join dbo.工作表2 b on";
 
             //strSql += "a." + Global.column2[0].ToString() + "= b." + Global.column2[0].ToString();
             for (int i = 0; i < Global.num; i++)
@@ -540,7 +539,7 @@ namespace project
                     strSql += " a.[" + Global.column2[i].ToString().Trim() + "] = b.[" + Global.column2[i].ToString().Trim()+"]";
 
             }
-
+            
             DataTable dt = new DataTable();
             try
             {
@@ -551,7 +550,7 @@ namespace project
                     command.CommandText = strSql;
                     SqlDataAdapter da = new SqlDataAdapter(command);
                     da.Fill(dt);
-
+                    
                     da.Dispose();
                     sqlconn.Close();
                 }
@@ -878,16 +877,22 @@ namespace project
                     sqlconn.Close();
                     Label1.Text = "";
                     Label2.Text = "";
-                    Label4.Text = "清除成功";
+
+                    string messageText = "清除成功";
+                    string type = "success";
+                    ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "text", string.Format("alert('{0}','{1}');", messageText,type), true);
                     Global.column.Clear();
                     Global.column2.Clear();
                     Global.same_col = "";
                     Global.dif_col.Clear();
-
+                    
                 }
                 catch(Exception ex)
                 {
                     MessageBox.Show(ex.Message);
+                    string messageText = "清除失敗";
+                    string type = "warning";
+                    ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "text", string.Format("alert('{0}','{1}');", messageText, type), true);
                 }
                 Check_db();
             }
@@ -905,7 +910,9 @@ namespace project
                     command.ExecuteNonQuery();
                     sqlconn.Close();                   
                     Label2.Text = "";
-                    Label4.Text = "清除成功";
+                    string messageText = "清除對比資料成功";
+                    string type = "success";
+                    ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "text", string.Format("alert('{0}','{1}');", messageText, type), true);
                     Global.column2.Clear();                   
                     Global.same_col = "";
                     Global.dif_col.Clear();
